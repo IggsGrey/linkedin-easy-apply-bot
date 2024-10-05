@@ -18,14 +18,15 @@ const state: AppState = {
 };
 
 const askForPauseInput = async () => {
-  await ask("press enter to pause the program");
-
-  state.paused = true;
-
-  await ask("finishing job application...\n");
-
-  state.paused = false;
-  message("unpaused");
+  if (!state.paused) {
+    await ask("Press enter to pause the program.");
+    state.paused = true;
+    await ask("Program paused. Press enter to unpause.");
+  } else {
+    await ask("Press enter to unpause the program.");
+    state.paused = false;
+    message("Program unpaused. Press enter to pause.");
+  }
 
   askForPauseInput();
 };
