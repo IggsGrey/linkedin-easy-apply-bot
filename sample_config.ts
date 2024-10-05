@@ -1,11 +1,13 @@
-export default {
+import { ConfigType } from './types/configTypes'
+
+const config: ConfigType = {
   // LOGIN DETAILS
   LINKEDIN_EMAIL: "",
   LINKEDIN_PASSWORD: "",
 
   // JOB SEARCH PARAMETERS
   KEYWORDS: "javascript",
-  DATE_POSTED: "", // possible values: "PAST_24_HOURS", "PAST_WEEK", "PAST_MONTH"
+  DATE_POSTED: "PAST_24_HOURS", // possible values: "PAST_24_HOURS", "PAST_WEEK", "PAST_MONTH"
   LOCATION: "Portugal",
   WORKPLACE: {
     REMOTE: true,
@@ -61,3 +63,5 @@ export default {
   // OTHER SETTINGS
   SINGLE_PAGE: false,
 }
+
+export default config
