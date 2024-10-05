@@ -24,9 +24,12 @@ async function login({ page, email, password }: Params): Promise<void> {
   await page.waitForNavigation({ waitUntil: 'load' });
 
   const captcha = await page.$(selectors.captcha);
-
-  if (captcha) {
-    await ask('Please solve the captcha and then press enter');
+  const verificationCodePrompt = await page.evaluate(() => 
+    document.body.innerText.toLowerCase().includes('please enter the verification code')
+  );
+  if (captcha || verificationCodePrompt) {
+    const instruction = captcha ? 'solve the captcha' : 'enter the verification code'
+    await ask(`Please ${instruction} and then press enter'`)
     await page.goto('https://www.linkedin.com/', { waitUntil: 'load' });
   }
 
