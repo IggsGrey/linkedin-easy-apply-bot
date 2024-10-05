@@ -1,5 +1,5 @@
 import { ElementHandle, Page } from 'puppeteer';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 const changeTextInput = withPauseCheck(async(container: ElementHandle | Page, selector: string, value: string): Promise<void> => {
   let input = selector ? await container.$(selector) : container as ElementHandle;

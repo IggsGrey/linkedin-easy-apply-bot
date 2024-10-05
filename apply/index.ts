@@ -33,7 +33,7 @@ interface Params {
   shouldSubmit: boolean;
 }
 
-async function apply({ page, link, formData, shouldSubmit }: Params): Promise<void> {
+async function applyToJob({ page, link, formData, shouldSubmit }: Params): Promise<void> {
   await page.goto(link, { waitUntil: 'load', timeout: 60000 });
 
   try {
@@ -64,4 +64,4 @@ async function apply({ page, link, formData, shouldSubmit }: Params): Promise<vo
   }
 }
 
-export default apply;
+export default applyToJob;

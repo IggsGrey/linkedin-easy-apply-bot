@@ -2,7 +2,7 @@ import { Page } from 'puppeteer';
 
 import selectors from '../selectors';
 import changeTextInput from './changeTextInput';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 const insertPhone = withPauseCheck(async(page: Page, phone: string): Promise<void> => {
   await changeTextInput(page, selectors.phone, phone);

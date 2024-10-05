@@ -9,7 +9,7 @@ import uncheckFollowCompany from './uncheckFollowCompany';
 import uploadDocs from './uploadDocs';
 import { ApplicationFormData } from '../apply';
 import message from '../utils/message';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 const noop = () => { };
 

@@ -1,7 +1,7 @@
 import { ElementHandle, Page } from 'puppeteer';
 
 import selectors from '../selectors';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 const fillBoolean = withPauseCheck(async(page: Page, booleans: { [key: string]: boolean }): Promise<void> => {
   const fieldsets = await page.$$(selectors.fieldset);

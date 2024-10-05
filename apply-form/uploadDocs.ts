@@ -1,7 +1,7 @@
 import { ElementHandle, Page } from 'puppeteer';
 
 import selectors from '../selectors';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 const uploadDocs = withPauseCheck(async(page: Page, cvPath: string, coverLetterPath: string): Promise<void> => {
   const docDivs = await page.$$(selectors.documentUpload);

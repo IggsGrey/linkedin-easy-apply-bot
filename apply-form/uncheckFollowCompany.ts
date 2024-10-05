@@ -1,7 +1,7 @@
 import { ElementHandle, Page } from "puppeteer";
 
 import selectors from "../selectors";
-import { withPauseCheck } from "../utils/pauseCheck";
+import { withPauseCheck } from "../utils/pause";
 
 const uncheckFollowCompany = withPauseCheck(async(page: Page) => {
   const checkbox = await page.$(selectors.followCompanyCheckbox);

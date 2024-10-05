@@ -40,8 +40,7 @@ const datesPosted: Record<date_posted, string> = {
   PAST_24_HOURS: 'r86400',
 }
 
-interface PARAMS {
-  page: Page,
+export interface JobSearchParams {
   location: string,
   keywords: string,
   datePosted: date_posted | null,
@@ -49,12 +48,12 @@ interface PARAMS {
   jobTitle: string,
   jobDescription: string,
   jobDescriptionLanguages: string[]
-};
+}
 
 /**
  * Fetches job links as a user (logged in)
  */
-async function* fetchJobLinksUser({ page, datePosted = null, location, keywords, workplace: { remote, onSite, hybrid }, jobTitle, jobDescription, jobDescriptionLanguages }: PARAMS): AsyncGenerator<[string, string, string]> {
+async function* fetchJobLinksAsUser(page: Page, { datePosted = null, location, keywords, workplace: { remote, onSite, hybrid }, jobTitle, jobDescription, jobDescriptionLanguages }: JobSearchParams): AsyncGenerator<[string, string, string]> {
   let numSeenJobs = 0;
   let numMatchingJobs = 0;
   const fWt = [onSite, remote, hybrid].reduce((acc, c, i) => c ? [...acc, i + 1] : acc, [] as number[]).join(',');
@@ -107,7 +106,7 @@ async function* fetchJobLinksUser({ page, datePosted = null, location, keywords,
           return hasLoadedStatus && hasLoadedDescription;
         }, {}, selectors);
 
-        const companyName = await page.$eval(`${selectors.searchResultListItem}:nth-child(${i + 1}) ${selectors.searchResultListItemCompanyName}`, el => (el as HTMLElement).innerText).catch(() => 'Unknown');;
+        const companyName = await page.$eval(`${selectors.searchResultListItem}:nth-child(${i + 1}) ${selectors.searchResultListItemCompanyName}`, el => (el as HTMLElement).innerText).catch(() => 'Unknown');
         const jobDescription = await page.$eval(selectors.jobDescription, el => (el as HTMLElement).innerText);
         const canApply = !!(await page.$(selectors.easyApplyButtonEnabled));
         const jobDescriptionLanguage = languageDetector.detect(jobDescription, 1)[0][0];
@@ -129,4 +128,4 @@ async function* fetchJobLinksUser({ page, datePosted = null, location, keywords,
   }
 }
 
-export default fetchJobLinksUser;
+export default fetchJobLinksAsUser;

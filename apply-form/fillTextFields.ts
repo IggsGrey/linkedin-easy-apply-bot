@@ -2,7 +2,7 @@ import { Page } from 'puppeteer';
 
 import selectors from '../selectors';
 import changeTextInput from './changeTextInput';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 interface TextFields {
   [labelRegex: string]: string | number;

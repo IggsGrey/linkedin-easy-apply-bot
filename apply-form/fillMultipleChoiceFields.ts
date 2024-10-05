@@ -1,6 +1,6 @@
 import { Page } from 'puppeteer';
 import selectors from '../selectors';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 interface MultipleChoiceFields {
   [labelRegex: string]: string;

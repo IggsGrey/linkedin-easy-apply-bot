@@ -1,5 +1,5 @@
 import { ElementHandle, Page } from 'puppeteer';
-import { withPauseCheck } from '../utils/pauseCheck';
+import { withPauseCheck } from '../utils/pause';
 
 import selectors from '../selectors';
 import changeTextInput from './changeTextInput';
