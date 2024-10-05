@@ -30,7 +30,7 @@ async function getJobSearchMetadata({ page, location, keywords }: { page: Page, 
     geoId,
     numAvailableJobs
   };
-};
+}
 
 export type date_posted = 'PAST_WEEK' | 'PAST_MONTH' | 'PAST_24_HOURS';
 
