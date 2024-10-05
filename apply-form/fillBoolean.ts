@@ -1,8 +1,9 @@
 import { ElementHandle, Page } from 'puppeteer';
 
 import selectors from '../selectors';
+import { withPauseCheck } from '../utils/pauseCheck';
 
-async function fillBoolean(page: Page, booleans: { [key: string]: boolean }): Promise<void> {
+const fillBoolean = withPauseCheck(async(page: Page, booleans: { [key: string]: boolean }): Promise<void> => {
   const fieldsets = await page.$$(selectors.fieldset);
 
   // fill 2 option radio button field sets
@@ -57,12 +58,10 @@ async function fillBoolean(page: Page, booleans: { [key: string]: boolean }): Pr
           const option = await options[value ? 0 : 1].evaluate((el) => (el as HTMLOptionElement).value);
 
           await select.select(option);
-
-          continue;
         }
       }
     }
   }
-}
+})
 
 export default fillBoolean;

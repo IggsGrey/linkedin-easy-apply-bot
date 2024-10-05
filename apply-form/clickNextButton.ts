@@ -1,11 +1,12 @@
 import { Page } from 'puppeteer';
 
 import selectors from '../selectors';
+import { withPauseCheck } from '../utils/pauseCheck';
 
-async function clickNextButton(page: Page): Promise<void> {
+const clickNextButton = withPauseCheck(async(page: Page): Promise<void> => {
   await page.click(selectors.nextButton);
 
   await page.waitForSelector(selectors.enabledSubmitOrNextButton, { timeout: 10000 });
-}
+})
 
 export default clickNextButton;

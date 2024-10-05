@@ -6,26 +6,15 @@ import message from "../utils/message";
 import login from "../login";
 import apply, { ApplicationFormData } from "../apply";
 import fetchJobLinksUser, { date_posted } from "../fetch/fetchJobLinksUser";
-
-interface AppState {
-  paused: boolean;
-}
-
-const wait = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
-
-const state: AppState = {
-  paused: false,
-};
+import { state } from '../state'
 
 const askForPauseInput = async () => {
   if (!state.paused) {
-    await ask("Press enter to pause the program.");
+    await ask("Program unpaused. Press enter to pause the program.");
     state.paused = true;
-    await ask("Program paused. Press enter to unpause.");
   } else {
-    await ask("Press enter to unpause the program.");
+    await ask("Program paused. Press enter to unpause the program.");
     state.paused = false;
-    message("Program unpaused. Press enter to pause.");
   }
 
   askForPauseInput();
@@ -88,7 +77,6 @@ const askForPauseInput = async () => {
         textFields: config.TEXT_FIELDS,
         multipleChoiceFields: config.MULTIPLE_CHOICE_FIELDS,
       };
-
       await apply({
         page: applicationPage,
         link,
@@ -103,11 +91,6 @@ const askForPauseInput = async () => {
     }
 
     await listingPage.bringToFront();
-
-    for(let shouldLog = true; state.paused; shouldLog = false){
-	shouldLog && message("\nProgram paused, press enter to continue the program");
-	await wait(2000);
-    }
   }
 
   // await browser.close();

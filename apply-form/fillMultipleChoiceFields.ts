@@ -1,11 +1,12 @@
 import { Page } from 'puppeteer';
 import selectors from '../selectors';
+import { withPauseCheck } from '../utils/pauseCheck';
 
 interface MultipleChoiceFields {
   [labelRegex: string]: string;
 }
 
-async function fillMultipleChoiceFields(page: Page, multipleChoiceFields: MultipleChoiceFields): Promise<void> {
+const fillMultipleChoiceFields = withPauseCheck(async(page: Page, multipleChoiceFields: MultipleChoiceFields): Promise<void> => {
   const selects = await page.$$(selectors.select);
 
   for (const select of selects) {
@@ -26,6 +27,6 @@ async function fillMultipleChoiceFields(page: Page, multipleChoiceFields: Multip
       }
     }
   }
-}
+})
 
 export default fillMultipleChoiceFields;
