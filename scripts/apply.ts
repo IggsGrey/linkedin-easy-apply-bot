@@ -4,7 +4,7 @@ import config from "../config";
 import message from "../utils/message";
 import logIntoLinkedin from "../login";
 import applyToJob, { ApplicationFormData } from "../apply";
-import fetchJobLinksAsUser, { date_posted, JobSearchParams } from "../fetch/fetchJobLinksUser";
+import fetchJobLinksAsUser, { DatePosted, JobSearchParams } from "../fetch/fetchJobLinksUser";
 import { ConfigType } from "../types/configTypes";
 import { pauseIfTheUserPressesEnter } from "../utils/pause";
 
@@ -64,7 +64,7 @@ function getJobSearchParamsFromConfig(config: ConfigType): JobSearchParams {
   return {
     location: config.LOCATION,
     keywords: config.KEYWORDS,
-    datePosted: config.DATE_POSTED as date_posted,
+    datePosted: config.DATE_POSTED as DatePosted,
     workplace: {
       remote: config.WORKPLACE.REMOTE,
       onSite: config.WORKPLACE.ON_SITE,
