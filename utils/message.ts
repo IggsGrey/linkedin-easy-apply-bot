@@ -1,3 +1,12 @@
+/**
+ * Logs a message with a timestamp.
+ * 
+ * @param text - The message to be logged. Can be a string or an Error object.
+ * 
+ * @example
+ * message('Application submitted successfully');
+ * // Output: [13.04.2023 15:30:45] Application submitted successfully
+ */
 const message = (text: string | Error) => {
     const date = new Date();
     const options: Intl.DateTimeFormatOptions = {
