@@ -1,4 +1,4 @@
-import puppeteer, { Page } from "puppeteer";
+import puppeteer, { BrowserContext, Page } from "puppeteer";
 import config from "../config";
 
 import message from "../utils/message";
@@ -25,11 +25,8 @@ import { pauseIfTheUserPressesEnter } from "../utils/pause";
   let jobApplicationPage: Page | null = null;
 
   for await (const [link, title, companyName] of linkGenerator) {
-    if (!jobApplicationPage || process.env.SINGLE_PAGE !== "true")
-      jobApplicationPage = await browser.newPage();
-
-    await jobApplicationPage.bringToFront();
-
+    jobApplicationPage = await getJobApplicationPageReady(jobApplicationPage, browser)
+    
     try {
       await applyToJob({
         page: jobApplicationPage,
@@ -74,6 +71,14 @@ function getJobSearchParamsFromConfig(config: ConfigType): JobSearchParams {
     jobDescription: config.JOB_DESCRIPTION,
     jobDescriptionLanguages: config.JOB_DESCRIPTION_LANGUAGES
   };
+}
+
+async function getJobApplicationPageReady(jobApplicationPage: Page | null, browser: BrowserContext) {
+  if (!jobApplicationPage || process.env.SINGLE_PAGE !== "true")
+    jobApplicationPage = await browser.newPage();
+
+  await jobApplicationPage.bringToFront();
+  return jobApplicationPage
 }
 
 function getApplicationFormDataFromConfig(config: ConfigType): ApplicationFormData {
