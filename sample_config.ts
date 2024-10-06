@@ -8,7 +8,7 @@ const config: ConfigType = {
   // JOB SEARCH PARAMETERS
   KEYWORDS: "javascript",
   DATE_POSTED: "PAST_24_HOURS", // possible values: "PAST_24_HOURS", "PAST_WEEK", "PAST_MONTH"
-  LOCATION: "Portugal",
+  LOCATION: "Remote",
   WORKPLACE: {
     REMOTE: true,
     ON_SITE: true,
