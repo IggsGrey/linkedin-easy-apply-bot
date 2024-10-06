@@ -4,7 +4,7 @@ import config from "../config";
 import message from "../utils/message";
 import logIntoLinkedin from "../login";
 import applyToJob, { ApplicationFormData } from "../apply";
-import fetchJobLinksAsUser, { DatePosted, JobSearchParams } from "../fetch/fetchJobLinksUser";
+import fetchJobLinksAsUser, { DatePosted, JobSearchParams } from "../fetch/fetchJobLinksAsUser";
 import { ConfigType } from "../types/configTypes";
 import { pauseIfTheUserPressesEnter } from "../utils/pause";
 
