@@ -23,14 +23,14 @@ export default {
   // JOB SEARCH PARAMETERS
   KEYWORDS: "your-job-search-keywords",
   DATE_POSTED: "", // possible values: "PAST_24_HOURS", "PAST_WEEK", "PAST_MONTH". Leave empty to default to whatever linkedin defaults to.
-  LOCATION: "your-job-search-location",
+  LOCATION: "your-job-search-location", // If you only want remote jobs, put "Remote" or "United States" or "European Union" here.
   WORKPLACE: {
     REMOTE: true, // whether-you-want-remote-jobs-or-not(true/false)
     ON_SITE: true, // whether-you-want-on-site-jobs-or-not(true/false)
     HYBRID: true, // whether-you-want-hybrid-jobs-or-not(true/false)
   },
-  JOB_TITLE: "a-regex-to-match-with-the-job-title",
-  JOB_DESCRIPTION: "a-regex-to-match-with-the-job-description",
+  JOB_TITLE: "a-regex-to-match-with-the-job-title", // You can leave this blank if you want to.
+  JOB_DESCRIPTION: "a-regex-to-match-with-the-job-description", // You can leave this blank if you want to.
 
   // FORM DATA
   PHONE: "your-phone-number",

@@ -1,7 +1,8 @@
 import { Page } from 'puppeteer';
+import { withPauseCheck } from '../utils/pause';
 
-async function waitForNoError(page: Page): Promise<void> {
+const waitForNoError = withPauseCheck(async(page: Page): Promise<void> => {
   await page.waitForFunction(() => !document.querySelector("div[id*='error'] div[class*='error']"), { timeout: 1000 });
-}
+})
 
 export default waitForNoError;

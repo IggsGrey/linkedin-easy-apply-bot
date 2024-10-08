@@ -2,12 +2,13 @@ import { Page } from 'puppeteer';
 
 import selectors from '../selectors';
 import changeTextInput from './changeTextInput';
+import { withPauseCheck } from '../utils/pause';
 
 interface TextFields {
   [labelRegex: string]: string | number;
 }
 
-async function fillTextFields(page: Page, textFields: TextFields): Promise<void> {
+const fillTextFields = withPauseCheck(async(page: Page, textFields: TextFields): Promise<void> => {
   const inputs = await page.$$(selectors.textInput);
 
   for (const input of inputs) {
@@ -20,6 +21,6 @@ async function fillTextFields(page: Page, textFields: TextFields): Promise<void>
       }
     }
   }
-}
+})
 
 export default fillTextFields;

@@ -108,3 +108,6 @@ config.ts
 
 # Ignore VS Code workspace settings
 .vscode
+
+# Ignore Jetbrains workspace settings
+.idea

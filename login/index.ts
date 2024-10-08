@@ -3,6 +3,7 @@ import { Page } from 'puppeteer';
 import ask from '../utils/ask';
 import selectors from '../selectors';
 import message from '../utils/message';
+import { withPauseCheck } from '../utils/pause'
 
 interface Params {
   page: Page;
@@ -10,7 +11,7 @@ interface Params {
   password: string;
 }
 
-async function login({ page, email, password }: Params): Promise<void> {
+const logIntoLinkedin = withPauseCheck(async ({ page, email, password }: Params): Promise<void> => {
   // Navigate to LinkedIn
   await page.goto('https://www.linkedin.com/login', { waitUntil: 'load' });
 
@@ -24,15 +25,18 @@ async function login({ page, email, password }: Params): Promise<void> {
   await page.waitForNavigation({ waitUntil: 'load' });
 
   const captcha = await page.$(selectors.captcha);
-
-  if (captcha) {
-    await ask('Please solve the captcha and then press enter');
+  const verificationCodePrompt = await page.evaluate(() => 
+    document.body.innerText.toLowerCase().includes('please enter the verification code')
+  );
+  if (captcha || verificationCodePrompt) {
+    const instruction = captcha ? 'solve the captcha' : 'enter the verification code'
+    await ask(`Please ${instruction} and then press enter'`)
     await page.goto('https://www.linkedin.com/', { waitUntil: 'load' });
   }
 
   message('Logged in to LinkedIn');
 
   await page.click(selectors.skipButton).catch(() => { });
-}
+})
 
-export default login;
+export default logIntoLinkedin;

@@ -1,8 +1,9 @@
 import { ElementHandle, Page } from 'puppeteer';
 
 import selectors from '../selectors';
+import { withPauseCheck } from '../utils/pause';
 
-async function uploadDocs(page: Page, cvPath: string, coverLetterPath: string): Promise<void> {
+const uploadDocs = withPauseCheck(async(page: Page, cvPath: string, coverLetterPath: string): Promise<void> => {
   const docDivs = await page.$$(selectors.documentUpload);
 
   for (const docDiv of docDivs) {
@@ -17,6 +18,6 @@ async function uploadDocs(page: Page, cvPath: string, coverLetterPath: string): 
       await input.uploadFile(coverLetterPath);
     }
   }
-}
+})
 
 export default uploadDocs;

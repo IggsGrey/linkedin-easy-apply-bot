@@ -1,6 +1,7 @@
 import { ElementHandle, Page } from 'puppeteer';
+import { withPauseCheck } from '../utils/pause';
 
-async function changeTextInput(container: ElementHandle | Page, selector: string, value: string): Promise<void> {
+const changeTextInput = withPauseCheck(async(container: ElementHandle | Page, selector: string, value: string): Promise<void> => {
   let input = selector ? await container.$(selector) : container as ElementHandle;
 
   if (!input) {
@@ -13,6 +14,6 @@ async function changeTextInput(container: ElementHandle | Page, selector: string
     await input.click({ clickCount: 3 }); // Select whole text to replace existing text
     await input.type(value);
   }
-}
+})
 
 export default changeTextInput;

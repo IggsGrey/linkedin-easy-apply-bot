@@ -9,10 +9,11 @@ import uncheckFollowCompany from './uncheckFollowCompany';
 import uploadDocs from './uploadDocs';
 import { ApplicationFormData } from '../apply';
 import message from '../utils/message';
+import { withPauseCheck } from '../utils/pause';
 
 const noop = () => { };
 
-async function fillFields(page: Page, formData: ApplicationFormData): Promise<void> {
+const fillFields = withPauseCheck(async(page: Page, formData: ApplicationFormData): Promise<void> => {
   await insertHomeCity(page, formData.homeCity).catch(noop);
 
   await insertPhone(page, formData.phone).catch(noop);
@@ -40,6 +41,6 @@ async function fillFields(page: Page, formData: ApplicationFormData): Promise<vo
   };
 
   await fillMultipleChoiceFields(page, multipleChoiceFields).catch(message);
-}
+})
 
 export default fillFields;
